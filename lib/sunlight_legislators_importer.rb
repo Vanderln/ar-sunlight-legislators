@@ -1,14 +1,13 @@
 require 'csv'
+require_relative '../app/models/politician'
+
 
 class SunlightLegislatorsImporter
   def self.import(filename)
-    csv = CSV.new(File.open(filename), :headers => true)
+    csv = CSV.new(File.open(filename), :headers => true, :header_converters => :symbol)
     csv.each do |row|
-      row.each do |field, value|
-        # TODO: begin
-        raise NotImplementedError, "TODO: figure out what to do with this row and do it!"
-        # TODO: end
-      end
+      pol = Politician.scrub_csv_data(row.to_hash)
+      pol.save
     end
   end
 end
