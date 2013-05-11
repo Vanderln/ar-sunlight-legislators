@@ -1,6 +1,9 @@
 require_relative '../../db/config'
 
+
 class Politician < ActiveRecord::Base
+  
+  
   def self.scrub_csv_data(attributes_hash = {})  
     clean_attributes = {}
 
